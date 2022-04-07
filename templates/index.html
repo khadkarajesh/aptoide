@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FlaskBlog</title>
+</head>
+<body>
+<h1>Welcome to Aptoide Crawler</h1>
+
+<form method="post" action="{{ url_for('search') }}">
+    {{ form.csrf_token }}
+    {{ form.name }}
+    {{ form.submit }}
+</form>
+</body>
+</html>

@@ -1,4 +1,3 @@
-from dotenv import load_dotenv
 from flask import Flask, render_template, request, redirect, url_for
 from flask_wtf import FlaskForm
 from wtforms import SubmitField, URLField
@@ -7,13 +6,18 @@ from wtforms.validators import DataRequired, URL
 from api_service import ApiService
 
 
+def create_app():
+    app = Flask(__name__)
+    app.config.from_object('default_settings')
+    return app
+
+
+app = create_app()
+
+
 class SearchForm(FlaskForm):
     url = URLField('field', validators=[DataRequired(), URL("Enter valid URL")])
     submit = SubmitField('Search')
-
-
-app = Flask(__name__)
-app.config.from_object('default_settings')
 
 
 @app.route('/search', methods=['POST'])

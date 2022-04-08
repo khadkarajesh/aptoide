@@ -28,7 +28,7 @@ config = {
             'formatter': 'default',
         },
         'file': {
-            'class': 'core.logger.AppFileHandler',
+            'class': 'logger.AppFileHandler',
             'formatter': 'default',
         },
     },

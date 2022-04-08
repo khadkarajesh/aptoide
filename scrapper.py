@@ -12,11 +12,11 @@ APP_RELEASE_DATE_CSS_CLASS = "mini-versions__VersionDate-sc-19sko2j-6"
 APP_DESCRIPTION_CSS_CLASS = "description__Paragraph-sc-45j1b1-1"
 
 
-class ApiService:
+class Scrapper:
     def __init__(self, url):
         self.url = url
 
-    def search(self) -> AppInformation:
+    def scrape(self) -> AppInformation:
         response = requests.get(self.url)
         soup = BeautifulSoup(response.text, 'html.parser')
         try:

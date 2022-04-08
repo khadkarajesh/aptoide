@@ -1,12 +1,13 @@
+import logging.config
 from typing import Any, Union
 
-from flask import Flask, render_template, request, redirect, url_for, logging
+from flask import Flask, render_template, request, redirect, url_for
 from flask_wtf import FlaskForm
 from werkzeug import Response
 from wtforms import SubmitField, URLField
 from wtforms.validators import DataRequired, URL
 
-from api_service import ApiService
+from scrapper import Scrapper
 from logger import config
 
 
@@ -27,8 +28,8 @@ class SearchForm(FlaskForm):
 
 @app.route('/search', methods=['POST'])
 def search() -> Union[Response, str]:
-    api_service = ApiService(request.form.get('url'))
-    return render_template("detail.html", data=api_service.search())
+    api_service = Scrapper(request.form.get('url'))
+    return render_template("detail.html", data=api_service.scrape())
 
 
 @app.route('/', methods=['GET', 'POST'])

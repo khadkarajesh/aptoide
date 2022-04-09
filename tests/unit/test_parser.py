@@ -4,8 +4,8 @@ from bs4 import PageElement
 from parser import *
 
 
-def test_parse_should_return_app_information(app_info, beautiful_soup):
-    def get_value(tag, attrs):
+def test_parse_should_return_app_information(app_info, beautiful_soup) -> None:
+    def get_value(_, attrs) -> list[PageElement]:
         css_class_value = {
             APP_DESCRIPTION_CSS_CLASS: app_info.description,
             APP_VERSION_CSS_CLASS: app_info.version,
@@ -23,11 +23,17 @@ def test_parse_should_return_app_information(app_info, beautiful_soup):
     beautiful_soup.find_all.side_effect = get_value
 
     parsed_app_info = parse(beautiful_soup)
+
     assert app_info == parsed_app_info
 
 
 @patch('parser.logging.error')
-def test_parse_should_raise_exception(mock_log, beautiful_soup):
+def test_parse_should_raise_exception(mock_log, beautiful_soup) -> None:
     beautiful_soup.find_all.return_value = []
-    parse(soup=beautiful_soup)
+
+    app_info = parse(soup=beautiful_soup)
+
     mock_log.assert_called()
+    assert app_info.name == ''
+    assert app_info.version == ''
+    assert app_info.download == ''

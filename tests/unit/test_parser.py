@@ -26,7 +26,7 @@ def test_parse_should_return_app_information(app_info, beautiful_soup):
     assert app_info == parsed_app_info
 
 
-@patch('scrapper.logging.error')
+@patch('parser.logging.error')
 def test_parse_should_raise_exception(mock_log, beautiful_soup):
     beautiful_soup.find_all.return_value = []
     parse(soup=beautiful_soup)

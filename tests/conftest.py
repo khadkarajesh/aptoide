@@ -3,6 +3,7 @@ from unittest.mock import Mock
 import pytest
 from bs4 import BeautifulSoup
 
+from app import create_app
 from app_info import AppInformation
 
 
@@ -18,3 +19,18 @@ def app_info():
 @pytest.fixture
 def beautiful_soup():
     return Mock(BeautifulSoup)
+
+
+@pytest.fixture()
+def app():
+    from app import app
+    app.config.update({
+        "TESTING": True,
+        "SECRET_KEY": "TEST"
+    })
+    yield app
+
+
+@pytest.fixture()
+def client(app):
+    return app.test_client()

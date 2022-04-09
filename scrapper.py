@@ -16,7 +16,6 @@ def parse(soup) -> AppInformation:
         download_count = soup.find_all('span', attrs={'class': APP_NUMBER_OF_DOWNLOADS_CSS_CLASS})[0].text
         release_date = soup.find_all('div', attrs={'class': APP_RELEASE_DATE_CSS_CLASS})[0].text.strip("()")
         description = soup.find_all('p', attrs={'class': APP_DESCRIPTION_CSS_CLASS})[0].text
-        logging.error(f"Couldn't find the html element with class name")
         return AppInformation(name=name,
                               version=version,
                               download=download_count,

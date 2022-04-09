@@ -1,12 +1,10 @@
 from unittest.mock import Mock, patch
-
 from bs4 import PageElement
 
 from scrapper import *
 
 
-@patch('scrapper.logging.error')
-def test_parse_should_return_app_information(mock_log, app_info, beautiful_soup):
+def test_parse_should_return_app_information(app_info, beautiful_soup):
     def get_value(tag, attrs):
         css_class_value = {
             APP_DESCRIPTION_CSS_CLASS: app_info.description,

@@ -1,11 +1,12 @@
 import logging.config
-from typing import Any, Union
+from typing import Any, Union, Optional
 
+import flask
 import requests
+import werkzeug.wrappers.response
 from bs4 import BeautifulSoup
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, Response
 from flask_wtf import FlaskForm
-from werkzeug import Response
 from wtforms import SubmitField, URLField
 from wtforms.validators import DataRequired, URL
 
@@ -29,14 +30,15 @@ class SearchForm(FlaskForm):
 
 
 @app.route('/search', methods=['POST'])
-def search() -> Union[Response, str]:
-    response = requests.get(request.form.get('url'))
+def search() -> str:
+    url: Any = request.form.get('url')
+    response: requests.Response = requests.get(url)
     soup = BeautifulSoup(response.text, 'html.parser')
     return render_template("detail.html", data=parse(soup=soup))
 
 
 @app.route('/', methods=['GET', 'POST'])
-def home() -> Union[Response, str]:
+def home() -> Union[str, werkzeug.wrappers.response.Response]:
     form = SearchForm(request.form)
     if form.validate_on_submit():
         return redirect(url_for('search'))

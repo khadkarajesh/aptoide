@@ -1,7 +1,7 @@
 from unittest.mock import Mock, patch
 from bs4 import PageElement
 
-from scrapper import *
+from parser import *
 
 
 def test_parse_should_return_app_information(app_info, beautiful_soup):

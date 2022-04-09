@@ -10,7 +10,7 @@ from wtforms import SubmitField, URLField
 from wtforms.validators import DataRequired, URL
 
 from logger import config
-from scrapper import parse
+from parser import parse
 
 
 def create_app() -> Any:

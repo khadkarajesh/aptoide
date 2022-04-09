@@ -23,3 +23,4 @@ def parse(soup) -> AppInformation:
                               description=description)
     except IndexError as e:
         logging.error(f"Couldn't find the html element with class name {e}")
+        return AppInformation()

@@ -3,3 +3,7 @@ beautifulsoup4
 Flask
 WTForms
 python-dotenv
+pytest
+types-requests
+typing_extensions
+flask_wtf

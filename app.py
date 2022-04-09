@@ -1,11 +1,10 @@
 import logging.config
-from typing import Any, Union, Optional
+from typing import Any, Union
 
-import flask
 import requests
 import werkzeug.wrappers.response
 from bs4 import BeautifulSoup
-from flask import Flask, render_template, request, redirect, url_for, Response
+from flask import Flask, render_template, request, redirect, url_for
 from flask_wtf import FlaskForm
 from wtforms import SubmitField, URLField
 from wtforms.validators import DataRequired, URL
